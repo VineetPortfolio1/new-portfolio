@@ -1,0 +1,888 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Vineet Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: three-column hero (copy | tilting spec card | proof + site cards), resume sections beneath.
+     Single committed look: deep crimson stage, cream surfaces, one yellow accent. */
+  :root {
+    --red: #8e1224;
+    --red-lift: #c01f38;
+    --red-deep: #4f0813;
+    --cream: #fff1e0;
+    --dim: #f2cfcf;
+    --yellow: #ffd23f;
+    --ink: #1a0509;
+    --glass: rgba(255, 255, 255, 0.12);
+    --line: rgba(255, 255, 255, 0.22);
+    --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+    --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--red); color: var(--cream);
+    background-image:
+      radial-gradient(55% 50% at 50% 34%, var(--red-lift) 0%, rgba(192, 31, 56, 0) 70%),
+      radial-gradient(130% 80% at 50% 115%, var(--red-deep) 0%, rgba(79, 8, 19, 0) 62%);
+    background-repeat: no-repeat;
+    font-family: var(--font-body); font-size: 17px; line-height: 1.6;
+    padding-block: 20px 72px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+
+  /* ---------- nav ---------- */
+  .nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .group { display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--cream); color: var(--red); display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; font-size: 15px; text-decoration: none; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px;
+    background: var(--glass); border: 1px solid var(--line); color: var(--cream);
+    text-decoration: none; font-weight: 500; font-size: 14px; transition: background .2s, color .2s;
+  }
+  .pill:hover { background: var(--cream); color: var(--ink); }
+  .pill.solid { background: var(--cream); color: var(--ink); }
+  .mark { font-family: var(--font-display); font-weight: 800; font-size: 18px; letter-spacing: -0.03em; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+  .mark i { width: 10px; height: 10px; background: var(--yellow); border-radius: 3px; transform: rotate(45deg); }
+
+  /* ---------- hero ---------- */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 460px) minmax(0, 1fr); gap: 28px; align-items: center; padding-top: 36px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); margin: 0 0 18px; }
+  h1 { font-family: var(--font-display); font-weight: 800; text-transform: uppercase; font-size: clamp(2.2rem, 4.5vw, 3.9rem); line-height: .98; letter-spacing: -0.03em; margin: 0 0 22px; }
+  h1 .hot { color: var(--yellow); }
+  .lede { max-width: 38ch; color: var(--dim); margin: 0 0 26px; }
+  .lede strong { color: var(--cream); font-weight: 600; }
+  .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; border-radius: 999px; border: 0; cursor: pointer; font: 600 15px/1 var(--font-body); text-decoration: none; transition: transform .2s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.dark { background: var(--ink); color: var(--cream); }
+  .btn.ghost { background: var(--glass); border: 1px solid var(--line); color: var(--cream); padding: 8px 20px 8px 8px; }
+  .btn.ghost .ico { width: 30px; height: 30px; border-radius: 50%; background: var(--yellow); color: var(--ink); display: grid; place-items: center; }
+  .tilt-read { display: flex; align-items: center; gap: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+  .track { position: relative; width: 120px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.3); }
+  .track i { position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; border-radius: 50%; background: var(--yellow); transform: translate(-50%, -50%); }
+  .readout { min-width: 11ch; color: var(--cream); font-variant-numeric: tabular-nums; }
+
+  /* ---------- 3D spec card ---------- */
+  .stage { position: relative; width: 100%; max-width: 460px; margin: 0 auto; padding: 24px 12px 56px; }
+  .scene { perspective: 1100px; }
+  .tilt { position: relative; transform-style: preserve-3d; will-change: transform; }
+  .plate { position: absolute; inset: 22px -14px -22px 14px; border-radius: 30px; background: rgba(255,255,255,.1); border: 1px solid var(--line); transform: translateZ(-60px); }
+  .card {
+    position: relative; transform-style: preserve-3d; border-radius: 28px; background: var(--cream); color: var(--ink);
+    padding: 22px 22px 24px; box-shadow: 0 40px 70px -20px rgba(30, 0, 8, .6);
+  }
+  .card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(circle at var(--sx, 30%) var(--sy, 20%), rgba(255,255,255,.7), rgba(255,255,255,0) 55%); mix-blend-mode: soft-light; }
+  .card-head { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #6b4b4b; margin-bottom: 18px; }
+  .dots { display: flex; gap: 6px; } .dots i { width: 9px; height: 9px; border-radius: 50%; background: #e3c9b3; }
+  .canvas { position: relative; display: grid; place-items: center; min-height: 210px; padding: 36px 44px 52px 12px; border-radius: 18px;
+    background-color: #fbe3cc; background-image: radial-gradient(#e2bd9c 1px, transparent 1px); background-size: 14px 14px; }
+  .spec { position: relative; display: inline-block; transform: translateZ(40px); }
+  .demo { position: relative; display: inline-block; overflow: hidden; background: var(--red); color: var(--cream); padding: 12px 24px; border-radius: 12px; font: 600 16px/24px var(--font-body); white-space: nowrap; }
+  .demo .label { position: relative; display: block; }
+  .wash { position: absolute; background: rgba(255, 210, 63, .38); outline: 1px dashed #b88700; outline-offset: -1px; pointer-events: none; }
+  .wash.l { left: 0; top: 0; bottom: 0; width: 24px; } .wash.r { right: 0; top: 0; bottom: 0; width: 24px; }
+  .wash.t { top: 0; left: 24px; right: 24px; height: 12px; } .wash.b { bottom: 0; left: 24px; right: 24px; height: 12px; }
+  .dim { position: absolute; display: flex; font-family: var(--font-mono); font-size: 11px; color: #7a1a22; }
+  .dim span { position: relative; display: grid; place-items: center; }
+  .dim.h { left: 0; right: 0; top: calc(100% + 12px); height: 12px; }
+  .dim.v { top: 0; bottom: 0; left: calc(100% + 12px); width: 12px; flex-direction: column; }
+  .dim.h span { border: 1px solid #7a1a22; border-top: 0; }
+  .dim.v span { border: 1px solid #7a1a22; border-left: 0; }
+  .dim b { position: absolute; font-weight: 500; background: #fbe3cc; padding: 0 3px; line-height: 1.2; }
+  .dim.h b { top: 10px; } .dim.v b { left: 10px; }
+  .rtag { position: absolute; left: 0; bottom: calc(100% + 8px); font-family: var(--font-mono); font-size: 11px; color: #7a1a22; }
+  .card.off .wash, .card.off .dim, .card.off .rtag { display: none; }
+  .code { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; padding: 10px 12px; border-radius: 12px; background: var(--ink); color: var(--cream); font-family: var(--font-mono); font-size: 13px; }
+  .code span:last-child { color: var(--yellow); }
+  .float { position: absolute; padding: 8px 14px; border-radius: 999px; background: var(--yellow); color: var(--ink); font-weight: 600; font-size: 13px; box-shadow: 0 14px 28px -10px rgba(30, 0, 8, .55); white-space: nowrap; }
+  .f1 { top: -6px; left: -10px; transform: translateZ(90px); }
+  .f2 { top: 34%; right: -16px; transform: translateZ(110px); background: var(--cream); }
+  .f3 { bottom: -10px; left: 6%; transform: translateZ(80px); background: var(--ink); color: var(--cream); }
+  .badge { position: absolute; right: 2%; bottom: -34px; width: 96px; height: 96px; pointer-events: none; }
+  .badge svg { width: 100%; height: 100%; overflow: visible; animation: spin 22s linear infinite; }
+  .badge text { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; fill: var(--cream); text-transform: uppercase; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- right column ---------- */
+  .side { display: grid; gap: 22px; min-width: 0; }
+  .proof { display: grid; gap: 10px; justify-items: start; }
+  .stack { display: flex; }
+  .stack span { width: 38px; height: 38px; border-radius: 50%; margin-left: -10px; border: 2px solid var(--red); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; font-size: 12px; background: var(--cream); color: var(--ink); }
+  .stack span:first-child { margin-left: 0; } .stack span:nth-child(2n) { background: var(--yellow); }
+  .proof h2 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; line-height: 1.25; letter-spacing: -0.02em; }
+  .proof p { margin: 0; font-size: 14px; color: var(--dim); max-width: 34ch; }
+  .cards { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 6px; scroll-snap-type: x proximity; }
+  .gcard { flex: 0 0 188px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; text-decoration: none; background: var(--glass); border: 1px solid var(--line); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transition: background .2s; }
+  .gcard:hover { background: rgba(255,255,255,.2); }
+  .gcard h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: .95rem; letter-spacing: -0.02em; line-height: 1.2; }
+  .gcard small { font-family: var(--font-mono); font-size: 11px; color: var(--dim); overflow-wrap: anywhere; }
+  .gcard .go { margin-top: auto; align-self: flex-start; padding: 7px 18px; border-radius: 999px; background: var(--cream); color: var(--ink); font-weight: 600; font-size: 12px; }
+
+  /* ---------- cursor ring ---------- */
+  .ring { position: fixed; left: 0; top: 0; width: 44px; height: 44px; margin: -22px 0 0 -22px; border: 1.5px solid var(--cream); border-radius: 50%; pointer-events: none; z-index: 20; opacity: 0; transition: opacity .3s; }
+  .ring.on { opacity: .9; }
+  @media (hover: none), (pointer: coarse) { .ring { display: none; } }
+
+  /* ---------- resume sections ---------- */
+  section.s { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 40px; padding-block: 56px; border-top: 1px solid var(--line); margin-top: 64px; }
+  section.s + section.s { margin-top: 0; }
+  .rail { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); }
+  .rail h2 { font: inherit; margin: 0; color: var(--cream); display: flex; align-items: center; gap: 10px; }
+  .rail h2::before { content: ""; width: 10px; height: 10px; background: var(--yellow); border-radius: 3px; transform: rotate(45deg); flex: none; }
+  .rail p { margin: 10px 0 0; text-transform: none; letter-spacing: 0; font-family: var(--font-body); font-size: 14px; line-height: 1.5; }
+  .body { min-width: 0; }
+  .entry { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 24px; padding-block: 24px; border-top: 1px solid var(--line); }
+  .entry:first-of-type { border-top: 0; padding-top: 0; }
+  .when { font-family: var(--font-mono); font-size: 13px; color: var(--dim); line-height: 1.5; }
+  .entry h3 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; letter-spacing: -0.02em; line-height: 1.2; margin: 0 0 4px; }
+  .entry .role { margin: 0 0 14px; color: var(--dim); font-size: 15px; }
+  .entry ul { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 64ch; }
+  .entry li::marker { color: var(--yellow); }
+  .scroll { overflow-x: auto; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 16px; }
+  .tbl th { text-align: left; font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--dim); padding: 0 16px 10px 0; border-bottom: 1px solid var(--cream); }
+  .tbl td { padding: 16px 16px 16px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .tbl td:first-child { font-family: var(--font-display); font-weight: 600; font-size: .95rem; letter-spacing: -0.02em; width: 24%; }
+  .tbl td:last-child { font-family: var(--font-mono); font-size: 12px; color: var(--dim); width: 22%; padding-right: 0; }
+  .kit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 40px; margin: 0; }
+  .kit dt { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; }
+  .kit dd, .kit p { margin: 0; }
+  .sites { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 32px; font-family: var(--font-mono); font-size: 14px; }
+  .sites li { border-bottom: 1px solid var(--line); }
+  .sites a { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; text-decoration: none; overflow-wrap: anywhere; }
+  .sites a:hover { color: var(--yellow); }
+  .mail { font-family: var(--font-display); font-weight: 800; font-size: clamp(1.3rem, 3.2vw, 2.3rem); letter-spacing: -0.03em; overflow-wrap: anywhere; margin: 0 0 16px; user-select: all; }
+  .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 14px; color: var(--dim); }
+  .copy { font: 600 13px/1 var(--font-body); padding: 11px 18px; border-radius: 999px; border: 0; background: var(--yellow); color: var(--ink); cursor: pointer; }
+
+  /* ---------- interactions ---------- */
+  .hero { position: relative; }
+  #field { position: absolute; left: -16px; top: -20px; width: calc(100% + 32px); height: calc(100% + 40px); z-index: 0; pointer-events: none; opacity: .8; }
+  .hero > :not(canvas) { position: relative; z-index: 1; }
+  .card { cursor: pointer; }
+  .prog { position: absolute; left: 0; bottom: -1px; height: 2px; width: 0; background: var(--yellow); }
+  .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 28px; }
+  .flabel { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); margin-right: 4px; }
+  .chip, .ptab { cursor: pointer; font: 500 14px/1 var(--font-body); padding: 9px 15px; border-radius: 999px; border: 1px solid var(--line); background: var(--glass); color: var(--cream); transition: background .2s, color .2s; }
+  .chip:hover, .ptab:hover { background: rgba(255,255,255,.22); }
+  .chip.on, .ptab.on { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .fcount { font-family: var(--font-mono); font-size: 12px; color: var(--dim); margin-left: 4px; }
+  .entry, .entry li { transition: opacity .25s; }
+  .entry.muted { opacity: .28; } .entry li.muted { opacity: .32; }
+  .entry li.hit { text-shadow: 0 0 0 var(--yellow); }
+  .entry li.hit::marker { color: var(--yellow); }
+  .ptabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .ptab { font-family: var(--font-display); font-weight: 600; font-size: 14px; padding: 12px 22px; letter-spacing: -0.02em; }
+  .proc.tabbed { grid-template-columns: minmax(0, 1fr); max-width: 720px; }
+  .panel.wide { grid-column: 1 / -1; }
+  .fields.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .search { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .search label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); }
+  .search input { flex: 1 1 220px; min-width: 0; height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: rgba(0,0,0,.22); color: var(--cream); font: 500 15px var(--font-body); }
+  .search input::placeholder { color: var(--dim); opacity: .8; }
+  .sites li[hidden] { display: none; }
+  .warn { color: var(--cream); }
+
+  /* ---------- sticky tabs ---------- */
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--red); z-index: 30; }
+  .tabs { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 25; margin: 16px 0 0; padding: 10px 0;
+    background: rgba(142, 18, 36, 0.88); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .tabs-in { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+  .tabs-in::-webkit-scrollbar { display: none; }
+  .tab { flex: none; padding: 8px 15px; border-radius: 999px; font-size: 14px; font-weight: 500; text-decoration: none; color: var(--dim); border: 1px solid transparent; transition: background .2s, color .2s; }
+  .tab:hover { color: var(--cream); border-color: var(--line); }
+  .tab.on { background: var(--cream); color: var(--ink); }
+  .hero, section.s { scroll-margin-top: 76px; }
+
+  /* ---------- new sections ---------- */
+  .prose p { margin: 0 0 18px; max-width: 62ch; }
+  .pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 40px; margin-top: 36px; }
+  .pairs h3, .pcard h3 { margin: 0 0 6px; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; line-height: 1.25; }
+  .pairs p { margin: 0; color: var(--dim); font-size: 15px; }
+  .proc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .pcard { padding: 24px; border-radius: 24px; background: var(--glass); border: 1px solid var(--line); min-width: 0; }
+  .pcard .step { font-family: var(--font-display); font-weight: 800; font-size: 1.9rem; text-transform: uppercase; letter-spacing: -0.03em; color: var(--yellow); margin: 0 0 14px; }
+  .pcard ul { margin: 0; padding-left: 1.1em; display: grid; gap: 10px; font-size: 15px; }
+  .pcard li::marker { color: var(--yellow); }
+  .after { margin: 22px 0 0; color: var(--dim); max-width: 62ch; }
+  .res { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+  .rcard { padding: 24px; border-radius: 24px; background: var(--glass); border: 1px solid var(--line); display: grid; gap: 8px; align-content: start; min-width: 0; }
+  .rcard .num { font-family: var(--font-display); font-weight: 800; font-size: clamp(2rem, 3.2vw, 2.7rem); letter-spacing: -0.04em; line-height: 1; color: var(--yellow); }
+  .rcard h3 { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.35; }
+  .rcard p { margin: 0; font-size: 14px; color: var(--dim); }
+  .fine { margin: 18px 0 0; font-family: var(--font-mono); font-size: 12px; color: var(--dim); }
+  .tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .panel { padding: 24px; border-radius: 24px; background: var(--glass); border: 1px solid var(--line); display: grid; gap: 16px; align-content: start; min-width: 0; }
+  .panel h3 { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; letter-spacing: -0.02em; }
+  .panel .sub { margin: -8px 0 0; font-size: 14px; color: var(--dim); }
+  .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .field { display: grid; gap: 6px; min-width: 0; }
+  .field label { font-family: var(--font-mono); font-size: 12px; letter-spacing: .05em; text-transform: uppercase; color: var(--dim); }
+  .field input { width: 100%; min-width: 0; height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line); background: rgba(0,0,0,.22); color: var(--cream); font: 500 16px var(--font-mono); }
+  .field input[type="color"] { padding: 4px; cursor: pointer; }
+  .outs { display: grid; gap: 0; margin: 0; font-family: var(--font-mono); font-size: 14px; }
+  .outs div { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+  .outs dt { color: var(--dim); } .outs dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+  .pass { color: var(--yellow); }
+  .sample { padding: 16px; border-radius: 14px; font-weight: 600; font-size: 18px; }
+  .ratio { font-family: var(--font-display); font-weight: 800; font-size: 2rem; letter-spacing: -0.03em; line-height: 1; }
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .faq details { border-top: 1px solid var(--line); }
+  .faq details:last-child { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--glass); border: 1px solid var(--line); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 500; }
+  .faq details[open] summary::after { content: "−"; background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+  .faq details p { margin: 0 0 18px; max-width: 62ch; color: var(--dim); }
+
+  @media (max-width: 1000px) {
+    .proc { grid-template-columns: minmax(0, 1fr); }
+    .tools { grid-template-columns: minmax(0, 1fr); }
+    .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .lede { max-width: 52ch; }
+    section.s { grid-template-columns: minmax(0, 1fr); gap: 20px; padding-block: 40px; }
+  }
+  @media (max-width: 600px) {
+    .pairs, .two { grid-template-columns: minmax(0, 1fr); }
+    .entry { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .kit { grid-template-columns: minmax(0, 1fr); }
+    .canvas { padding: 32px 40px 48px 8px; }
+    .f2 { right: -6px; } .f1 { left: -4px; }
+    .badge { width: 80px; height: 80px; right: 0; bottom: -30px; }
+    .tbl td:last-child, .tbl th:last-child { display: none; }
+    .tbl td:first-child { width: 34%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .badge svg { animation: none; } .btn, .pill, .gcard { transition: none; } }
+</style>
+
+<div class="ring" id="ring" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="nav">
+    <div class="group"><a class="avatar" href="#top" aria-label="Vineet, home">V</a></div>
+    <a class="mark" href="#top"><i aria-hidden="true"></i>vineet</a>
+    <div class="group"><a class="pill" href="#contact">Contact</a></div>
+  </header>
+  <nav class="tabs" aria-label="Sections">
+    <div class="prog" id="prog" aria-hidden="true"></div>
+    <div class="tabs-in" id="tabsIn">
+      <a class="tab on" href="#home">Home</a>
+      <a class="tab" href="#story">Story</a>
+      <a class="tab" href="#path">Path</a>
+      <a class="tab" href="#process">Process</a>
+      <a class="tab" href="#results">Results</a>
+      <a class="tab" href="#holds">Holds up</a>
+      <a class="tab" href="#play">Playground</a>
+      <a class="tab" href="#kit">Skills</a>
+      <a class="tab" href="#learn">Learning</a>
+      <a class="tab" href="#sites">Sites</a>
+      <a class="tab" href="#faq">FAQ</a>
+      <a class="tab" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero" id="home" aria-label="Introduction">
+      <canvas id="field" aria-hidden="true"></canvas>
+      <div>
+        <p class="eyebrow">
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#ffd23f"/><path d="M4.6 8.2l2.2 2.2 4.6-4.8" fill="none" stroke="#1a0509" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          UI/UX developer · New Delhi
+        </p>
+        <h1>Spec.<br>Build.<br><span class="hot">Verify.</span></h1>
+        <p class="lede">I'm <strong>Vineet</strong>. For 5+ years I've turned Figma specs into responsive, accessible interfaces in React.js and Tailwind CSS. Move your cursor and tilt the spec.</p>
+        <div class="ctas">
+          <a class="btn dark" href="#path">See my path <span aria-hidden="true">→</span></a>
+          <button class="btn ghost" type="button" id="redline" aria-pressed="true"><span class="ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M3 1.5l7 4.5-7 4.5z" fill="currentColor"/></svg></span><span id="redlineLabel">Redline on</span></button>
+          <button class="btn ghost" type="button" id="nextSpec"><span class="ico" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6h8M6 2l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Next spec</button>
+        </div>
+        <div class="tilt-read"><span>Tilt</span><span class="track" aria-hidden="true"><i id="thumb"></i></span><span class="readout" id="readout">0° center</span></div>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="scene">
+          <div class="tilt" id="tilt">
+            <div class="plate" aria-hidden="true"></div>
+            <div class="card" id="card" role="img" aria-label="A demo spec card: a button with padding 24 and 12, radius 12, and Tailwind classes px-6 py-3 rounded-xl">
+              <div class="card-head"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Component · Button</span></div>
+              <div class="canvas">
+                <div class="spec">
+                  <span class="rtag">radius 12</span>
+                  <div class="demo">
+                    <span class="wash l"></span><span class="wash r"></span><span class="wash t"></span><span class="wash b"></span>
+                    <span class="label" id="label">Request a quote</span>
+                  </div>
+                  <div class="dim h" aria-hidden="true"><span style="flex:0 0 24px"><b>24</b></span><span style="flex:1"><b id="dw">0</b></span><span style="flex:0 0 24px"><b>24</b></span></div>
+                  <div class="dim v" aria-hidden="true"><span style="flex:0 0 12px"><b>12</b></span><span style="flex:1"><b>24</b></span><span style="flex:0 0 12px"><b>12</b></span></div>
+                </div>
+              </div>
+              <div class="code"><span>class</span><span>px-6 py-3 rounded-xl</span></div>
+            </div>
+            <span class="float f1">Figma → React</span>
+            <span class="float f2">WCAG 2.1 AA</span>
+            <span class="float f3">Tailwind CSS</span>
+          </div>
+        </div>
+        <div class="badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="circ" d="M60 60 m-44 0 a44 44 0 1 1 88 0 a44 44 0 1 1 -88 0"/></defs>
+            <text><textPath href="#circ">Move your cursor · Tilt the spec · </textPath></text></svg>
+        </div>
+      </div>
+
+      <aside class="side" aria-label="Highlights and selected sites">
+        <div class="proof">
+          <div class="stack" aria-hidden="true"><span>Re</span><span>Tw</span><span>JS</span><span>Sa</span></div>
+          <h2>5+ years, now at Webware.io</h2>
+          <p>25% less code redundancy and 20% better Core Web Vitals (LCP/FID) through reusable components and bundle work.</p>
+        </div>
+        <div class="cards" aria-label="Selected sites">
+          <a class="gcard" href="https://cowboysgrill.ca" target="_blank" rel="noopener"><h3>Cowboys Grill</h3><small>cowboysgrill.ca</small><span class="go">GO ↗</span></a>
+          <a class="gcard" href="https://arbitrationplace.com" target="_blank" rel="noopener"><h3>Arbitration Place</h3><small>arbitrationplace.com</small><span class="go">GO ↗</span></a>
+          <a class="gcard" href="https://longevitywellnessexpo.com" target="_blank" rel="noopener"><h3>Longevity Wellness Expo</h3><small>longevitywellnessexpo.com</small><span class="go">GO ↗</span></a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="s" id="story" aria-labelledby="story-h">
+      <div class="rail"><h2 id="story-h">Story</h2><p>How the path adds up.</p></div>
+      <div class="body">
+        <div class="prose">
+          <p>I started in technical support and QA at Sony in 2019, the year I finished my B.Tech at Krishna Engineering College. The work was troubleshooting software and network problems for clients.</p>
+          <p>In November 2020 I moved into front-end work as a developer trainee at Magic Software. I built responsive pages from PSD, PDF and Figma files, wrote W3C-compliant markup, deployed over FTP and sent a project status report every day.</p>
+          <p>Freelance work for clients followed (September 2022 to February 2023). Since March 2023 I've been at Webware.io, working in React.js and Tailwind CSS, championing accessibility, and building a documented component library.</p>
+        </div>
+        <div class="pairs">
+          <div><h3>Fidelity to the design</h3><p>Pixel-accurate builds from Figma, strict cross-browser compatibility, and layouts that are fully responsive.</p></div>
+          <div><h3>Accessibility</h3><p>Legacy markup audited and refactored to WCAG 2.1 AA.</p></div>
+          <div><h3>Speed</h3><p>Core Web Vitals (LCP/FID) up 20%, and page loads 1.5 seconds faster on average on freelance work.</p></div>
+          <div><h3>Clear handoffs</h3><p>A documented component library, documentation for non-technical stakeholders, and daily status reports.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="path" aria-labelledby="path-h">
+      <div class="rail"><h2 id="path-h">Path</h2><p>Four roles, newest first. Support and QA came first, then code.</p></div>
+      <div class="body">
+        <div class="filters" role="group" aria-label="Highlight the path by skill">
+          <span class="flabel">Highlight</span>
+          <button class="chip on" type="button" data-f="All" aria-pressed="true">All</button>
+          <button class="chip" type="button" data-f="React" aria-pressed="false">React</button>
+          <button class="chip" type="button" data-f="Tailwind" aria-pressed="false">Tailwind</button>
+          <button class="chip" type="button" data-f="Figma to code" aria-pressed="false">Figma to code</button>
+          <button class="chip" type="button" data-f="Accessibility" aria-pressed="false">Accessibility</button>
+          <button class="chip" type="button" data-f="Performance" aria-pressed="false">Performance</button>
+          <button class="chip" type="button" data-f="APIs" aria-pressed="false">APIs</button>
+          <button class="chip" type="button" data-f="Workflow" aria-pressed="false">Workflow</button>
+          <span class="fcount" id="fcount" aria-live="polite"></span>
+        </div>
+        <div class="entry"><div class="when">Mar 2023<br>to present</div><div>
+          <h3>Webware.io</h3><p class="role">UI UX Developer</p>
+          <ul>
+            <li>Build and maintain web applications in React.js, JavaScript (ES6+) and Tailwind CSS. Reusable UI components cut code redundancy by 25%.</li>
+            <li>Turn complex Figma designs into responsive interfaces with strict cross-browser compatibility.</li>
+            <li>Integrate RESTful APIs with backend teams, handling asynchronous data binding and state management.</li>
+            <li>Optimized bundle sizes and asset delivery, improving Core Web Vitals (LCP/FID) by 20%.</li>
+            <li>Built and documented a reusable component library that shortened feature-to-production time across sprints.</li>
+            <li>Audited and refactored legacy markup to meet WCAG 2.1 AA.</li>
+            <li>Work in Git and JIRA, in Agile sprints.</li>
+          </ul></div></div>
+        <div class="entry"><div class="when">Sep 2022<br>to Feb 2023</div><div>
+          <h3>Freelance</h3><p class="role">UI Developer</p>
+          <ul>
+            <li>Delivered custom web applications in HTML5, CSS3 (Sass), Tailwind CSS and JavaScript, built to each client's specification.</li>
+            <li>Optimized legacy scripts and added interactive elements, improving page-load speed by 1.5 seconds on average.</li>
+            <li>Shipped semantic, maintainable code and wrote documentation that non-technical stakeholders could follow.</li>
+          </ul></div></div>
+        <div class="entry"><div class="when">Nov 2020<br>to Jul 2022</div><div>
+          <h3>Magic Software</h3><p class="role">Developer Trainee</p>
+          <ul>
+            <li>Built responsive pages from PSD, PDF and Figma designs using HTML, CSS, Bootstrap, JavaScript and jQuery.</li>
+            <li>Wrote semantic, W3C-compliant markup that worked across browsers.</li>
+            <li>Managed version control in SVN, deployed over FTP, and filed daily project status reports.</li>
+          </ul></div></div>
+        <div class="entry"><div class="when">Aug 2019<br>to Mar 2020</div><div>
+          <h3>Sony Pvt. Ltd.</h3><p class="role">Technical Support, QA</p>
+          <ul><li>Troubleshot software and network issues for clients, and installed and configured software systems.</li></ul></div></div>
+        <div class="entry"><div class="when">2019</div><div>
+          <h3>Krishna Engineering College</h3><p class="role">B.Tech/B.E., Ghaziabad. Later courses: JavaScript projects, React JS.</p></div></div>
+      </div>
+    </section>
+
+    <section class="s" id="process" aria-labelledby="process-h">
+      <div class="rail"><h2 id="process-h">Process</h2><p>The three words in the headline, and what each one covers in my work.</p></div>
+      <div class="body">
+        <div class="ptabs" role="tablist" aria-label="Process steps">
+          <button class="ptab on" role="tab" type="button" id="pt0" aria-selected="true">Spec</button>
+          <button class="ptab" role="tab" type="button" id="pt1" aria-selected="false" tabindex="-1">Build</button>
+          <button class="ptab" role="tab" type="button" id="pt2" aria-selected="false" tabindex="-1">Verify</button>
+        </div>
+        <div class="proc tabbed" id="proc">
+          <div class="pcard"><p class="step">Spec</p>
+            <ul>
+              <li>Start from the Figma file, or the PSD or PDF on earlier projects.</li>
+              <li>Translate it into responsive layouts that match the spec to the pixel.</li>
+              <li>Pull repeated pieces into reusable components.</li>
+            </ul></div>
+          <div class="pcard"><p class="step">Build</p>
+            <ul>
+              <li>Semantic HTML, styled with Tailwind CSS or Sass.</li>
+              <li>React.js components in JavaScript (ES6+).</li>
+              <li>RESTful API integration with backend teams, including async data binding and state management.</li>
+              <li>Git and JIRA, in Agile sprints.</li>
+            </ul></div>
+          <div class="pcard"><p class="step">Verify</p>
+            <ul>
+              <li>Cross-browser and responsive checks.</li>
+              <li>WCAG 2.1 AA audits and refactors.</li>
+              <li>Core Web Vitals (LCP/FID), bundle size and asset delivery.</li>
+              <li>W3C-compliant markup, and email builds with Litmus in the toolkit.</li>
+            </ul></div>
+        </div>
+        <p class="after">Then I document it: component docs for the team, and plain-language notes for stakeholders who don't code.</p>
+      </div>
+    </section>
+
+    <section class="s" id="results" aria-labelledby="results-h">
+      <div class="rail"><h2 id="results-h">Results</h2><p>The measurable parts of my work, with where each came from.</p></div>
+      <div class="body">
+        <div class="res">
+          <div class="rcard"><span class="num">25%</span><h3>Less code redundancy</h3><p>Reusable UI components and a design-system approach at Webware.io.</p></div>
+          <div class="rcard"><span class="num">20%</span><h3>Better Core Web Vitals</h3><p>LCP and FID, from bundle-size and asset-delivery work at Webware.io. It also helped SEO visibility.</p></div>
+          <div class="rcard"><span class="num">1.5s</span><h3>Faster page loads, on average</h3><p>From optimizing legacy script structures on freelance projects.</p></div>
+          <div class="rcard"><span class="num">AA</span><h3>WCAG 2.1 compliance</h3><p>Legacy markup audited and refactored at Webware.io.</p></div>
+        </div>
+        <p class="fine">Figures as stated on my resume.</p>
+      </div>
+    </section>
+
+    <section class="s" id="holds" aria-labelledby="holds-h">
+      <div class="rail"><h2 id="holds-h">Where it holds up</h2><p>The places a build gets tested, and what my resume says I did about each.</p></div>
+      <div class="body scroll">
+        <table class="tbl">
+          <thead><tr><th scope="col">Environment</th><th scope="col">What I did</th><th scope="col">Where</th></tr></thead>
+          <tbody>
+            <tr><td>Browsers and screens</td><td>Pixel-accurate builds from Figma, strict cross-browser compatibility, fully responsive layouts.</td><td>Webware.io</td></tr>
+            <tr><td>Accessibility</td><td>Audited and refactored legacy markup to WCAG 2.1 AA.</td><td>Webware.io</td></tr>
+            <tr><td>Email clients</td><td>Email development is a core skill, with Litmus in the toolkit.</td><td>Skills</td></tr>
+            <tr><td>Load time</td><td>Core Web Vitals (LCP/FID) up 20% from bundle and asset work. Page loads 1.5 seconds faster on average after optimizing legacy scripts.</td><td>Webware.io, Freelance</td></tr>
+            <tr><td>Standards</td><td>Semantic, W3C-compliant markup.</td><td>Magic Software</td></tr>
+            <tr><td>Handoffs</td><td>A documented component library, REST API integration with backend teams, and daily status reports.</td><td>Webware.io, Magic Software</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="s" id="play" aria-labelledby="play-h">
+      <div class="rail"><h2 id="play-h">Playground</h2><p>Two small tools I'd reach for while building. They run in this page.</p></div>
+      <div class="body">
+        <div class="tools">
+          <div class="panel" role="group" aria-labelledby="t1">
+            <h3 id="t1">px, rem and Tailwind</h3>
+            <p class="sub">Convert a design value to rem and to Tailwind's spacing scale.</p>
+            <div class="fields">
+              <div class="field"><label for="pxIn">Pixels</label><input id="pxIn" type="number" min="0" step="1" value="24" inputmode="decimal"></div>
+              <div class="field"><label for="baseIn">Base size</label><input id="baseIn" type="number" min="1" step="1" value="16" inputmode="decimal"></div>
+            </div>
+            <dl class="outs" aria-live="polite">
+              <div><dt>rem</dt><dd id="remOut">1.5rem</dd></div>
+              <div><dt>Tailwind step</dt><dd id="twOut">6</dd></div>
+              <div><dt>Class</dt><dd id="twClass">p-6</dd></div>
+            </dl>
+          </div>
+          <div class="panel" role="group" aria-labelledby="t2">
+            <h3 id="t2">Contrast check</h3>
+            <p class="sub">WCAG contrast ratio for a text and background pair.</p>
+            <div class="fields">
+              <div class="field"><label for="fg">Text</label><input id="fg" type="color" value="#fff1e0"></div>
+              <div class="field"><label for="bg">Background</label><input id="bg" type="color" value="#8e1224"></div>
+            </div>
+            <div class="sample" id="sample">Sample text, 18px semibold</div>
+            <div class="ratio" id="ratio" aria-live="polite">0:1</div>
+            <dl class="outs">
+              <div><dt>AA, normal text (4.5)</dt><dd id="aaN">Pass</dd></div>
+              <div><dt>AA, large text (3)</dt><dd id="aaL">Pass</dd></div>
+              <div><dt>AAA, normal text (7)</dt><dd id="aaaN">Pass</dd></div>
+              <div><dt>AAA, large text (4.5)</dt><dd id="aaaL">Pass</dd></div>
+            </dl>
+          </div>
+          <div class="panel wide" role="group" aria-labelledby="t3">
+            <h3 id="t3">Core Web Vitals check</h3>
+            <p class="sub">Type in your numbers to see where they land against Google's published thresholds. My resume lists LCP and FID. Google has since replaced FID with INP, so both are here.</p>
+            <div class="fields three">
+              <div class="field"><label for="lcp">LCP (s)</label><input id="lcp" type="number" min="0" step="0.1" value="2.1" inputmode="decimal"></div>
+              <div class="field"><label for="fid">FID (ms)</label><input id="fid" type="number" min="0" step="1" value="80" inputmode="decimal"></div>
+              <div class="field"><label for="inp">INP (ms)</label><input id="inp" type="number" min="0" step="1" value="180" inputmode="decimal"></div>
+            </div>
+            <dl class="outs" aria-live="polite">
+              <div><dt>LCP (good up to 2.5 s)</dt><dd id="lcpR">Good</dd></div>
+              <div><dt>FID (good up to 100 ms)</dt><dd id="fidR">Good</dd></div>
+              <div><dt>INP (good up to 200 ms)</dt><dd id="inpR">Good</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="kit" aria-labelledby="kit-h">
+      <div class="rail"><h2 id="kit-h">Toolkit</h2></div>
+      <div class="body">
+        <dl class="kit">
+          <div><dt>Build</dt><dd><p>HTML5, CSS3, Sass / Less, JavaScript (ES6+), JSON, XHTML, React.js, Tailwind CSS, Bootstrap, Foundation, jQuery</p></dd></div>
+          <div><dt>Quality</dt><dd><p>Accessibility (WCAG), email development, Litmus, cross-browser testing</p></dd></div>
+          <div><dt>Workflow</dt><dd><p>Git, SVN, JIRA, FTP, Agile sprints, Figma specs</p></dd></div>
+          <div><dt>AI-assisted</dt><dd><p>Claude, ChatGPT and Gemini for debugging, code generation and refactoring.</p></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="s" id="used" aria-labelledby="used-h">
+      <div class="rail"><h2 id="used-h">Where I used what</h2><p>Each skill, matched to the role where my resume shows it.</p></div>
+      <div class="body scroll">
+        <table class="tbl">
+          <thead><tr><th scope="col">Skill</th><th scope="col">Where</th></tr></thead>
+          <tbody>
+            <tr><td>React.js, JavaScript (ES6+)</td><td>Webware.io, plus a React JS course</td></tr>
+            <tr><td>Tailwind CSS</td><td>Webware.io, Freelance</td></tr>
+            <tr><td>HTML5, CSS3, Sass</td><td>Freelance</td></tr>
+            <tr><td>HTML, CSS, Bootstrap, jQuery</td><td>Magic Software</td></tr>
+            <tr><td>Figma, PSD and PDF to code</td><td>Webware.io (Figma), Magic Software (all three)</td></tr>
+            <tr><td>REST APIs and state management</td><td>Webware.io</td></tr>
+            <tr><td>Accessibility, WCAG 2.1 AA</td><td>Webware.io</td></tr>
+            <tr><td>Git, JIRA, Agile</td><td>Webware.io</td></tr>
+            <tr><td>SVN, FTP</td><td>Magic Software</td></tr>
+            <tr><td>Email development, Litmus</td><td>Skills list</td></tr>
+            <tr><td>Foundation, Less, XHTML, JSON</td><td>Skills list</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="s" id="learn" aria-labelledby="learn-h">
+      <div class="rail"><h2 id="learn-h">Learning</h2><p>Education, courses and how I use AI tools.</p></div>
+      <div class="body">
+        <div class="two">
+          <div class="panel"><h3>Education</h3><p class="sub" style="margin:0">B.Tech/B.E., Krishna Engineering College, Ghaziabad. 2019.</p>
+            <p class="sub" style="margin:0">Courses: JavaScript projects, React JS.</p></div>
+          <div class="panel"><h3>AI-assisted workflow</h3><p class="sub" style="margin:0">I use Claude and ChatGPT to speed up debugging, testing and production-ready deployments. Gemini, code generation and refactoring are also on my skills list.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="s" id="sites" aria-labelledby="sites-h">
+      <div class="rail"><h2 id="sites-h">Sites I've built</h2></div>
+      <div class="body">
+        <div class="search">
+          <label for="siteQ">Filter sites</label>
+          <input id="siteQ" type="search" placeholder="Try “wellness” or “.ca”" autocomplete="off">
+          <span class="fcount" id="siteCount" aria-live="polite"></span>
+        </div>
+        <ul class="sites" id="siteList">
+          <li><a href="https://longevitywellnessexpo.com" target="_blank" rel="noopener">longevitywellnessexpo.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://cowboysgrill.ca" target="_blank" rel="noopener">cowboysgrill.ca <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://arbitrationplace.com" target="_blank" rel="noopener">arbitrationplace.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://justletmedoit.com" target="_blank" rel="noopener">justletmedoit.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://nourielobgyn.com" target="_blank" rel="noopener">nourielobgyn.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://faascloud.co" target="_blank" rel="noopener">faascloud.co <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://classactions.us" target="_blank" rel="noopener">classactions.us <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://sflcatering.com" target="_blank" rel="noopener">sflcatering.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://vesretta.com" target="_blank" rel="noopener">vesretta.com <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://trimed-integrative-psychiatry.webware.io" target="_blank" rel="noopener">trimed-integrative-psychiatry.webware.io <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://clockwork-accounting-financial.webware.io" target="_blank" rel="noopener">clockwork-accounting-financial.webware.io <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://claudia-hehr1.webware.io" target="_blank" rel="noopener">claudia-hehr1.webware.io <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="s" id="faq" aria-labelledby="faq-h">
+      <div class="rail"><h2 id="faq-h">FAQ</h2><p>Short answers, taken from my resume.</p></div>
+      <div class="body faq">
+        <details><summary>What do you build with?</summary><p>React.js, JavaScript (ES6+) and Tailwind CSS day to day. Earlier work used HTML5, CSS3 with Sass, Bootstrap and jQuery.</p></details>
+        <details><summary>Can you work from Figma files?</summary><p>Yes. At Webware.io I turn complex Figma designs into responsive, cross-browser interfaces. At Magic Software I worked from PSD, PDF and Figma.</p></details>
+        <details><summary>Do you build emails?</summary><p>Email development is one of my skills, and Litmus is in my toolkit.</p></details>
+        <details><summary>How do you handle accessibility?</summary><p>At Webware.io I audited and refactored legacy markup to meet WCAG 2.1 AA.</p></details>
+        <details><summary>How do you work with backend teams?</summary><p>I integrate RESTful APIs with them, handling asynchronous data binding and state management. We track work in JIRA and ship in Agile sprints, with Git for version control.</p></details>
+        <details><summary>How do you document your work?</summary><p>I built and documented a reusable component library at Webware.io, wrote documentation for non-technical stakeholders on freelance projects, and sent daily status reports at Magic Software.</p></details>
+        <details><summary>Where are you based?</summary><p>New Delhi, India.</p></details>
+      </div>
+    </section>
+
+    <section class="s" id="contact" aria-labelledby="contact-h">
+      <div class="rail"><h2 id="contact-h">Contact</h2></div>
+      <div class="body">
+        <p class="mail" id="mail">vickydutt501@gmail.com</p>
+        <div class="row"><button class="copy" type="button" id="copymail">Copy address</button><span>New Delhi, India</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+  var stage = $('stage'), tilt = $('tilt'), card = $('card'), ring = $('ring');
+  var tx = 0, ty = 0, x = 0, y = 0, lastMove = 0, mx = -100, my = -100, rx = -100, ry = -100;
+
+  function measure() { $('dw').textContent = Math.round($('label').offsetWidth); }
+  measure();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+
+  window.addEventListener('pointermove', function (e) {
+    var r = stage.getBoundingClientRect();
+    tx = clamp((e.clientX - (r.left + r.width / 2)) / (window.innerWidth * 0.45), -1, 1);
+    ty = clamp((e.clientY - (r.top + r.height / 2)) / (window.innerHeight * 0.5), -1, 1);
+    lastMove = performance.now(); mx = e.clientX; my = e.clientY;
+    if (fine) ring.classList.add('on');
+  }, { passive: true });
+  document.addEventListener('mouseleave', function () { ring.classList.remove('on'); });
+
+  $('redline').addEventListener('click', function () {
+    var on = this.getAttribute('aria-pressed') !== 'true';
+    this.setAttribute('aria-pressed', String(on));
+    card.classList.toggle('off', !on);
+    $('redlineLabel').textContent = on ? 'Redline on' : 'Redline off';
+  });
+
+  $('copymail').addEventListener('click', function () {
+    var btn = this, src = $('mail'), old = btn.textContent;
+    function done(t) { btn.textContent = t; setTimeout(function () { btn.textContent = old; }, 1400); }
+    function pick() {
+      try { var rg = document.createRange(); rg.selectNodeContents(src); var s = window.getSelection(); s.removeAllRanges(); s.addRange(rg); done('Selected'); } catch (e) {}
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(src.textContent).then(function () { done('Copied'); }, pick);
+    } else { pick(); }
+  });
+
+  /* ---- hero: click or press Next spec to change the demo button ---- */
+  var specs = [
+    { x: 24, y: 12, r: 12, cls: 'px-6 py-3 rounded-xl' },
+    { x: 32, y: 16, r: 8,  cls: 'px-8 py-4 rounded-lg' },
+    { x: 16, y: 8,  r: 24, cls: 'px-4 py-2 rounded-3xl' },
+    { x: 20, y: 8,  r: 4,  cls: 'px-5 py-2 rounded' }
+  ];
+  var si = 0;
+  function applySpec(i) {
+    var s = specs[i], d = card.querySelector('.demo');
+    d.style.padding = s.y + 'px ' + s.x + 'px'; d.style.borderRadius = s.r + 'px';
+    card.querySelector('.wash.l').style.width = s.x + 'px';
+    card.querySelector('.wash.r').style.width = s.x + 'px';
+    ['t', 'b'].forEach(function (k) { var w = card.querySelector('.wash.' + k); w.style.height = s.y + 'px'; w.style.left = s.x + 'px'; w.style.right = s.x + 'px'; });
+    var hs = card.querySelectorAll('.dim.h span'), vs = card.querySelectorAll('.dim.v span');
+    [0, 2].forEach(function (k) { hs[k].style.flexBasis = s.x + 'px'; hs[k].querySelector('b').textContent = s.x; vs[k].style.flexBasis = s.y + 'px'; vs[k].querySelector('b').textContent = s.y; });
+    card.querySelector('.rtag').textContent = 'radius ' + s.r;
+    card.querySelector('.code span:last-child').textContent = s.cls;
+    card.setAttribute('aria-label', 'A demo spec card: a button with horizontal padding ' + s.x + ', vertical padding ' + s.y + ', radius ' + s.r + ', and Tailwind classes ' + s.cls);
+    measure();
+  }
+  function nextSpec() { si = (si + 1) % specs.length; applySpec(si); }
+  $('nextSpec').addEventListener('click', nextSpec);
+  card.addEventListener('click', nextSpec);
+
+  /* ---- hero: generative dot field that bends around the cursor ---- */
+  var field = $('field'), fctx = field.getContext('2d'), hero = $('home'), fw = 0, fh = 0;
+  function sizeField() {
+    var r = hero.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    fw = r.width + 32; fh = r.height + 40;
+    field.width = Math.round(fw * dpr); field.height = Math.round(fh * dpr);
+    fctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawField(true);
+  }
+  function drawField(force) {
+    if (!force && (reduce || document.hidden || window.scrollY > hero.offsetTop + hero.offsetHeight)) return;
+    var fr = field.getBoundingClientRect(), now = performance.now(), px, py;
+    if (reduce) { px = -999; py = -999; }
+    else if (now - lastMove < 3500) { px = mx - fr.left; py = my - fr.top; }
+    else { var sr = stage.getBoundingClientRect(); px = sr.left + sr.width / 2 + x * 240 - fr.left; py = sr.top + sr.height / 2 + y * 140 - fr.top; }
+    var step = 34, R = 170;
+    fctx.clearRect(0, 0, fw, fh);
+    for (var gx = step / 2; gx < fw; gx += step) {
+      for (var gy = step / 2; gy < fh; gy += step) {
+        var dx = gx - px, dy = gy - py, d = Math.sqrt(dx * dx + dy * dy) || 1, k = d < R ? 1 - d / R : 0;
+        var ox = (dx / d) * k * k * 28, oy = (dy / d) * k * k * 28;
+        fctx.beginPath();
+        fctx.arc(gx + ox, gy + oy, 1.2 + k * 2.6, 0, 6.2832);
+        fctx.fillStyle = k > 0.04 ? 'rgba(255,210,63,' + (0.35 + k * 0.6).toFixed(2) + ')' : 'rgba(255,241,224,0.26)';
+        fctx.fill();
+      }
+    }
+  }
+  window.addEventListener('resize', sizeField);
+  if (window.ResizeObserver) new ResizeObserver(sizeField).observe(hero);
+  sizeField();
+
+  /* ---- scroll progress ---- */
+  var prog = $('prog');
+  window.addEventListener('scroll', function () {
+    var m = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (m > 0 ? Math.min(100, window.scrollY / m * 100) : 0).toFixed(1) + '%';
+  }, { passive: true });
+
+  /* ---- path: highlight bullets by skill ---- */
+  var rules = {
+    'React': /react/i, 'Tailwind': /tailwind/i, 'Figma to code': /figma|psd/i,
+    'Accessibility': /wcag|accessib/i, 'Performance': /core web|page-load|bundle|speed|asset/i,
+    'APIs': /rest/i, 'Workflow': /git|jira|svn|ftp|agile|status report|documentation|documented|component library/i
+  };
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var lis = Array.prototype.slice.call(document.querySelectorAll('#path .entry li'));
+  var entries = Array.prototype.slice.call(document.querySelectorAll('#path .entry'));
+  function filterPath(f) {
+    chips.forEach(function (c) { var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on); c.setAttribute('aria-pressed', String(on)); });
+    var n = 0;
+    lis.forEach(function (li) {
+      var hit = f === 'All' || rules[f].test(li.textContent);
+      li.classList.toggle('muted', !hit); li.classList.toggle('hit', f !== 'All' && hit);
+      if (hit) n++;
+    });
+    entries.forEach(function (e) {
+      var any = f === 'All' || Array.prototype.some.call(e.querySelectorAll('li'), function (li) { return rules[f].test(li.textContent); });
+      e.classList.toggle('muted', !any);
+    });
+    $('fcount').textContent = f === 'All' ? '' : n + ' of ' + lis.length + ' bullets match';
+  }
+  chips.forEach(function (c) { c.addEventListener('click', function () { filterPath(c.getAttribute('data-f')); }); });
+
+  /* ---- process: tabs ---- */
+  var ptabs = Array.prototype.slice.call(document.querySelectorAll('.ptab'));
+  var ppanels = Array.prototype.slice.call(document.querySelectorAll('#proc .pcard'));
+  ppanels.forEach(function (p, i) { p.setAttribute('role', 'tabpanel'); p.setAttribute('aria-labelledby', 'pt' + i); });
+  function showStep(i, focus) {
+    ptabs.forEach(function (t, j) { t.classList.toggle('on', j === i); t.setAttribute('aria-selected', String(j === i)); t.tabIndex = j === i ? 0 : -1; });
+    ppanels.forEach(function (p, j) { p.hidden = j !== i; });
+    if (focus) ptabs[i].focus();
+  }
+  ptabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showStep(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); showStep((i + 1) % 3, true); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); showStep((i + 2) % 3, true); }
+    });
+  });
+  showStep(0);
+
+  /* ---- results: count up once when scrolled into view ---- */
+  var nums = Array.prototype.slice.call(document.querySelectorAll('.rcard .num'));
+  if ('IntersectionObserver' in window && !reduce) {
+    var cio = new IntersectionObserver(function (ents) {
+      ents.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        var el = en.target, txt = el.textContent, m = /^([\d.]+)(.*)$/.exec(txt);
+        if (!m) return;
+        var target = parseFloat(m[1]), dec = (m[1].split('.')[1] || '').length, t0 = performance.now();
+        (function tick(now) {
+          var p = Math.min(1, (now - t0) / 900), e = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * e).toFixed(dec) + m[2];
+          if (p < 1) requestAnimationFrame(tick); else el.textContent = txt;
+        })(t0);
+      });
+    }, { threshold: 0.6 });
+    nums.forEach(function (n) { cio.observe(n); });
+  }
+
+  /* ---- playground: Core Web Vitals ---- */
+  function rate(v, good, poor) { return isNaN(v) ? '–' : v <= good ? 'Good' : v <= poor ? 'Needs improvement' : 'Poor'; }
+  function calcCwv() {
+    [['lcp', 'lcpR', 2.5, 4], ['fid', 'fidR', 100, 300], ['inp', 'inpR', 200, 500]].forEach(function (c) {
+      var r = rate(parseFloat($(c[0]).value), c[2], c[3]), el = $(c[1]);
+      el.textContent = r; el.className = r === 'Good' ? 'pass' : '';
+    });
+  }
+  ['lcp', 'fid', 'inp'].forEach(function (id) { $(id).addEventListener('input', calcCwv); });
+  calcCwv();
+
+  /* ---- sites: live filter ---- */
+  var siteItems = Array.prototype.slice.call(document.querySelectorAll('#siteList li'));
+  $('siteQ').addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase(), n = 0;
+    siteItems.forEach(function (li) { var hit = !q || li.textContent.toLowerCase().indexOf(q) !== -1; li.hidden = !hit; if (hit) n++; });
+    $('siteCount').textContent = q ? (n ? n + ' of ' + siteItems.length + ' shown' : 'No match') : '';
+  });
+
+  /* ---- tabs: highlight the section in view ---- */
+  var tabsIn = $('tabsIn'), tabs = Array.prototype.slice.call(tabsIn.querySelectorAll('.tab'));
+  var map = {};
+  tabs.forEach(function (t) { map[t.getAttribute('href').slice(1)] = t; });
+  function setOn(id) {
+    var t = map[id]; if (!t) return;
+    tabs.forEach(function (o) { o.classList.toggle('on', o === t); });
+    tabsIn.scrollTo({ left: t.offsetLeft - tabsIn.clientWidth / 2 + t.clientWidth / 2, behavior: reduce ? 'auto' : 'smooth' });
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) setOn(e.target.id); });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    Object.keys(map).forEach(function (id) { var s = $(id); if (s) io.observe(s); });
+  }
+
+  /* ---- tool: px, rem, Tailwind ---- */
+  var steps = [0.5,1,1.5,2,2.5,3,3.5,4,5,6,7,8,9,10,11,12,14,16,20,24,28,32,36,40,44,48,52,56,60,64,72,80,96];
+  function calcPx() {
+    var px = parseFloat($('pxIn').value), base = parseFloat($('baseIn').value) || 16;
+    if (isNaN(px) || px < 0) { $('remOut').textContent = '–'; $('twOut').textContent = '–'; $('twClass').textContent = '–'; return; }
+    $('remOut').textContent = +(px / base).toFixed(4) + 'rem';
+    var n = px / 4, best = steps[0];
+    steps.forEach(function (s) { if (Math.abs(s - n) < Math.abs(best - n)) best = s; });
+    var exact = steps.indexOf(n) !== -1 || n === 0;
+    $('twOut').textContent = exact ? String(n) : best + ' (nearest, ' + best * 4 + 'px)';
+    $('twClass').textContent = 'p-' + (exact ? n : best);
+  }
+  ['pxIn', 'baseIn'].forEach(function (id) { $(id).addEventListener('input', calcPx); });
+  calcPx();
+
+  /* ---- tool: WCAG contrast ---- */
+  function lum(hex) {
+    var c = [1, 3, 5].map(function (i) {
+      var v = parseInt(hex.slice(i, i + 2), 16) / 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function calcContrast() {
+    var f = $('fg').value, b = $('bg').value, l1 = lum(f), l2 = lum(b);
+    var r = (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+    $('ratio').textContent = r.toFixed(2) + ':1';
+    $('sample').style.color = f; $('sample').style.background = b;
+    [['aaN', 4.5], ['aaL', 3], ['aaaN', 7], ['aaaL', 4.5]].forEach(function (p) {
+      var el = $(p[0]), ok = r >= p[1];
+      el.textContent = ok ? 'Pass' : 'Fail'; el.className = ok ? 'pass' : '';
+    });
+  }
+  ['fg', 'bg'].forEach(function (id) { $(id).addEventListener('input', calcContrast); });
+  calcContrast();
+
+  function frame(now) {
+    if (!reduce && now - lastMove > 3500) { tx = Math.sin(now / 2100) * 0.7; ty = Math.sin(now / 3100) * 0.3; }
+    var k = reduce ? 1 : 0.08;
+    x += (tx - x) * k; y += (ty - y) * k;
+    tilt.style.transform = 'rotateX(' + (-y * 12).toFixed(2) + 'deg) rotateY(' + (x * 18).toFixed(2) + 'deg)';
+    card.style.setProperty('--sx', (50 + x * 40).toFixed(1) + '%');
+    card.style.setProperty('--sy', (30 + y * 40).toFixed(1) + '%');
+    var deg = Math.round(Math.abs(x) * 18);
+    $('readout').textContent = deg < 1 ? '0° center' : deg + '° ' + (x < 0 ? 'left' : 'right');
+    $('thumb').style.left = ((x + 1) / 2 * 100).toFixed(1) + '%';
+    drawField();
+    if (fine) {
+      rx += (mx - rx) * (reduce ? 1 : 0.2); ry += (my - ry) * (reduce ? 1 : 0.2);
+      ring.style.transform = 'translate(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px)';
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+</body></html>
